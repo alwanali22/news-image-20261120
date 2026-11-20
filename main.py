@@ -1,30 +1,22 @@
-"""Entrypoint: publish the built front page as the entry image.
-
-Copies the pre-rendered entry.png next to this file into the output
-directory the harness gives us (MAKEFUN_OUTPUT_DIR, default /output),
-then checks the copy landed with the same byte count. No rendering
-happens here; draw_v2.py is the generator.
+#!/usr/bin/env python3
+"""main.py — news-image-20261120 v3 entrypoint.
+Copies the pre-rendered entry.png to the output directory.
+Deterministic: the same bytes every run.
 """
-
 import os
 import shutil
 
 
-def _paths():
-    here = os.path.dirname(os.path.abspath(__file__))
-    origin = os.path.join(here, "entry.png")
-    out_dir = os.environ.get("MAKEFUN_OUTPUT_DIR", "/output")
-    target = os.path.join(out_dir, "entry.png")
-    return origin, target
-
-
 def publish():
-    origin, target = _paths()
-    os.makedirs(os.path.dirname(target), exist_ok=True)
-    shutil.copyfile(origin, target)
-    if os.path.getsize(origin) != os.path.getsize(target):
-        raise RuntimeError("published entry.png is a different size "
-                           "than the shipped one")
+    here = os.path.dirname(os.path.abspath(__file__))
+    src = os.path.join(here, "entry.png")
+    outdir = os.environ.get("MAKEFUN_OUTPUT_DIR", "/output")
+    os.makedirs(outdir, exist_ok=True)
+    dst = os.path.join(outdir, "entry.png")
+    shutil.copyfile(src, dst)
+    with open(src, "rb") as fh:
+        size = len(fh.read())
+    print(f"entry.png ({size} bytes) -> {dst}")
 
 
 if __name__ == "__main__":

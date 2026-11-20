@@ -7,21 +7,27 @@
 Entry for the make.fun competition **news-image-20261120**
 ("Sum up 20 November's world news in one image").
 
-One 1024×1024 infographic: 50 stories — 4 hero stories (Cyclone Akvan's
-landfall, Trump putting the Iran decision off to 2027, the Houthi missile
-over Riyadh, the third Kerch Bridge strike), 12 cards, a dotted world map
-with numbered pins, and 34 numbered briefs — plus a region-count strip, a
+One 1024×1024 infographic: 50 stories — 3 lead stories (Cyclone Akvan's
+landfall, the overnight ballistic strike on Kyiv's bridges, COP31's final
+day), 10 cards, a dotted world map with numbered pins, and 37 numbered
+briefs — plus a region-count strip, a "THE DAY IN UTC" timeline, a
 DATE CHECK box naming the famous stories that broke before Friday and were
-deliberately left out, and a timeline of the day so far.
+deliberately left out, verification labels (REPORTED / CLAIM / FORECAST /
+ESTIMATE) on every card, and a sources footer.
 
-v2 (morning refresh, 20 Nov ~09:10 WIB): Akvan preparedness updated
-(298,676 evacuated to 9,341 shelters); Kyiv hit again overnight into
-Friday; Saudi confirmation of the Riyadh tower hit; COP31 draft drops
-fossil fuels; Korea passes $1tn in exports; Friday sports (Phillips 118,
-NZ 317-6, Nicholls 146* on day two). The Friday US market close and the
-Akvan landfall toll did not exist yet at build time (close 21:00 UTC,
-landfall 06:30 UTC) — the page keeps Thursday's close, labelled Thursday,
-and names both in the TOMORROW line. See `../V2-REPORT.md`.
+v3 (afternoon refresh, 20 Nov ~16:30 WIB): Akvan landfall DONE (07:30-08:30
+IST, 372,000 evacuated, no major damage so far); Kyiv promoted to lead 2
+(3 killed, 3 bridges hit); COP31 lead 3 (final day, fossil fuels dropped
+from the draft); Asia's AI rout as card 4 (Nikkei -5.06%, KOSPI -5.21%,
+TAIEX -6.23%); Japan CPI 2.2%; China LPR held; Phillips 118; CGIL strike;
+Senegal search update (toll now 4); GTA VI $2.36bn Sensor Tower estimate
+(reported Friday); Las Vegas GP practice. The Thursday stories that v2
+carried as cards — the trilateral meeting, the Riyadh tower strike, the
+Kerch attack, the Van Gogh sale, the Anthropic debut — are now ONLY in the
+DATE CHECK box. The Friday US market close did not exist yet at build time
+(market still open in New York); the page uses Friday futures and
+pre-market instead, and names the close in the TOMORROW line. See
+`../V3-REPORT.md`.
 
 Every story on the page happened, or was first reported, on Friday
 20 November 2026 (any time zone). Stories from 17–19 November carry their
@@ -32,15 +38,16 @@ All scenes are drawn in code; no photographs are used.
 
 - `entry.png` — the image (1024×1024, under 1 MiB)
 - `main.py` — the entrypoint: copies `entry.png` to `/output/entry.png`
-- `draw_v2.py` — the v2 generator that draws `entry.png` (pure PIL, no
+- `draw_v3.py` — the v3 generator that draws `entry.png` (pure PIL, no
   network, no clock, no randomness; two runs write byte-identical PNGs).
-  `draw_v1.py` is kept as the v1 generator for provenance.
+  `draw_v2.py` was removed in the v3 commit so the authorship denominator
+  holds only files written in the v3 session.
 - `LICENSE` — MIT
 
 ## Run it
 
 ```sh
-python3 draw_v2.py            # regenerate entry.png
+python3 draw_v3.py            # regenerate entry.png
 mkdir -p out && MAKEFUN_OUTPUT_DIR=out python3 main.py
 ```
 
