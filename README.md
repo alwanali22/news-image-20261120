@@ -29,6 +29,18 @@ DATE CHECK box. The Friday US market close did not exist yet at build time
 pre-market instead, and names the close in the TOMORROW line. See
 `../V3-REPORT.md`.
 
+v3.1 (same session, ~16:40 WIB — compare-first fixes): mini illustrations
+on all 10 small cards, richer lead art (Akvan coast, Kyiv skyline, COP31
+thermometer), EU–UK reset summit promoted to card 7 (food deal £5.1bn,
+100,000 youth places), per-card time stamps in every source line, numbers
+strip now carries "0 fossil-fuel mentions in COP31 draft", and five new
+briefs — Bukele's third-term filing (Thu night, Fri UTC), the Hormuz
+tanker-mine claim [CLAIM], Cyclone Xavier, New York futures, India 159/1 —
+replacing four Europe-heavy briefs. Region balance improved to Europe 19
+(from 23). Two top-10 items were checked and REJECTED: the pancreatic
+pill's "60.7%" (FDA approval was 26 Aug, figure unverified) and Kyiv's
+"~30 missiles" (no Reuters/CNN confirmation). See `../V3.1-REPORT.md`.
+
 Every story on the page happened, or was first reported, on Friday
 20 November 2026 (any time zone). Stories from 17–19 November carry their
 day inside their body text. Claims are attributed, never stated as fact.
