@@ -32,6 +32,18 @@ leads with the UN's Friday briefing (25 seafarers killed since February,
 qualifying and the BepiColombo insertion are Saturday events — TOMORROW /
 DATE CHECK only. See `../V4-REPORT.md` and `../V4-BRIEF-2026-11-21.md`.
 
+v4.1 (same session, ~12:45 WIB — typography round after a head-to-head
+against the live top 1–10): no story, number, or date changed. Red
+nameplate banners on all 3 leads (CYCLONE AKVAN / KYIV / COP31) and all
+10 cards (WALL STREET … TRUMP); lead headlines 16 → 18 px; the masthead
+subline is now a red news ticker of the four biggest stories (Kyiv
+bridges, Akvan landfall, AI sell-off, COP31 overtime); the numbers strip
+is enlarged (20 → 27 px) with the $3.79bn GTA VI figure kept prominent;
+and the card kicker rows are fixed — 8 of 10 had the place kicker
+colliding with the source line, so kickers are now place-only and the
+source line drops the redundant "· REPORTED" (timestamps and the CLAIM /
+FORECAST flags stay). See `../V4.1-REPORT.md`.
+
 v3 (afternoon refresh, 20 Nov ~16:30 WIB): Akvan landfall DONE (07:30-08:30
 IST, 372,000 evacuated, no major damage so far); Kyiv promoted to lead 2
 (3 killed, 3 bridges hit); COP31 lead 3 (final day, fossil fuels dropped

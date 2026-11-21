@@ -139,62 +139,62 @@ LEADS = [
 ]
 
 CARDS = [
-    dict(n=4, kicker="NEW YORK \u00b7 MARKETS",
+    dict(n=4, kicker="NEW YORK",
          head="Wall Street closes deep in the red",
          body=("Dow 48,147 \u2212949.73 (\u22121.93%). S&P 6,910 \u2212265.44 "
                "(\u22123.70%), 7th straight fall. Nasdaq 22,618 "
                "\u22121,261.47 (\u22125.28%), negative for 2026."),
-         src="REUTERS \u00b7 21:00 UTC \u00b7 REPORTED", scene="usclose"),
-    dict(n=5, kicker="ASIA \u00b7 MARKETS",
+         src="REUTERS \u00b7 21:00 UTC", scene="usclose"),
+    dict(n=5, kicker="ASIA",
          head="AI rout sweeps Asia's markets",
          body=("Nikkei \u22125.06% to 56,437. KOSPI \u22125.21% to 4,870. "
                "TAIEX \u22126.23% to 36,033. Worst week since 2020; "
                "SoftBank \u221214.48%."),
-         src="CNBC \u00b7 ASIA CLOSE \u00b7 REPORTED", scene="asiaai"),
-    dict(n=6, kicker="MERCURY \u00b7 SPACE",
+         src="CNBC \u00b7 ASIA CLOSE", scene="asiaai"),
+    dict(n=6, kicker="MERCURY",
          head="BepiColombo set for Mercury orbit on Saturday",
          body=("After eight years in space, the ESA\u2013JAXA probe enters "
                "Mercury orbit on Sat 21 Nov. Insertion is the key "
                "manoeuvre."),
          src="ESA \u00b7 FORECAST", scene="bepi"),
-    dict(n=7, kicker="BRUSSELS \u00b7 EUROPE",
+    dict(n=7, kicker="BRUSSELS",
          head="EU and UK agree a Brexit reset deal",
          body=("Food trade eased, worth up to \u00a35.1bn a year. Carbon "
                "markets link from 2028. 100,000 youth places a year; "
                "Erasmus+ returns."),
-         src="REUTERS \u00b7 REPORTED", scene="euuk"),
-    dict(n=8, kicker="BEIJING \u00b7 RATES",
+         src="REUTERS", scene="euuk"),
+    dict(n=8, kicker="BEIJING",
          head="China holds lending rates again",
          body=("One-year LPR 3.0%, five-year 3.5% \u2014 unchanged for an "
                "18th straight month, as expected."),
-         src="PBOC \u00b7 01:15 UTC \u00b7 REPORTED", scene="lpr"),
-    dict(n=9, kicker="WELLINGTON \u00b7 CRICKET",
+         src="PBOC \u00b7 01:15 UTC", scene="lpr"),
+    dict(n=9, kicker="WELLINGTON",
          head="Nicholls 175* and Phillips 118 rescue NZ",
          body=("A 216-run sixth-wicket stand lifts NZ to 368 all out. "
                "India reply 159/1 \u2014 Jaiswal 85, Rahul 52* \u2014 and "
                "trail by 209."),
-         src="REUTERS \u00b7 DAY 2 \u00b7 REPORTED", scene="cricket"),
-    dict(n=10, kicker="HORMUZ \u00b7 GULF",
+         src="REUTERS \u00b7 DAY 2", scene="cricket"),
+    dict(n=10, kicker="HORMUZ",
          head="UN counts the cost of the Hormuz attacks",
          body=("25 seafarers killed since February, 136 incidents to "
                "11 Nov. Iran's navy claims a tanker hit a mine off "
                "Khasab [CLAIM]."),
          src="UN \u00b7 AP \u00b7 REPORTED + CLAIM", scene="hormuz"),
-    dict(n=11, kicker="SAN SALVADOR \u00b7 POLITICS",
+    dict(n=11, kicker="SAN SALVADOR",
          head="Bukele files for an unprecedented third term",
          body=("Registered Thu night (Fri UTC) with VP Ulloa. Vote 28 Feb "
                "2027. Term limits were scrapped in 2025; four rivals stand."),
-         src="REUTERS \u00b7 REPORTED", scene="bukele"),
-    dict(n=12, kicker="PACIFIC \u00b7 WEATHER",
+         src="REUTERS", scene="bukele"),
+    dict(n=12, kicker="PACIFIC",
          head="Cyclone Xavier holds at Category 4",
          body=("922 hPa, about 200 km west of Manihiki. Nassau under storm "
                "alert. Drifting south and weakening, toward Samoa."),
-         src="METSERVICE NZ \u00b7 11:20 FRI \u00b7 REPORTED", scene="xavier"),
-    dict(n=13, kicker="WASHINGTON \u00b7 POLITICS",
+         src="METSERVICE NZ \u00b7 11:20 FRI", scene="xavier"),
+    dict(n=13, kicker="WASHINGTON",
          head="Trump's 90 minutes: Putin, data centres, 2028",
          body=("Defends calling Putin a 'friend'. 'Tremendous tax' on firms "
                "building data centres abroad. Floats Miller for president."),
-         src="CNN \u00b7 WSJ \u00b7 17:00 UTC \u00b7 REPORTED", scene="trump"),
+         src="CNN \u00b7 WSJ \u00b7 17:00 UTC", scene="trump"),
 ]
 
 BRIEFS = [
@@ -250,6 +250,14 @@ FOOTER = ("Sources: Reuters \u00b7 AP \u00b7 AFP \u00b7 IMD \u00b7 ATP Tour \u00
           "was first reported, on Friday 20 November 2026 in at least one time zone.  "
           "HOW SURE: REPORTED = confirmed  \u00b7  CLAIM = one side's account, "
           "unverified  \u00b7  FORECAST = scheduled.")
+
+# nameplate banners (typography round v4.1): big white-on-red labels.
+LEAD_BANNERS = {1: "CYCLONE AKVAN", 2: "KYIV", 3: "COP31"}
+CARD_BANNERS = {4: "WALL STREET", 5: "AI SELL-OFF", 6: "MERCURY",
+                7: "EU-UK", 8: "CHINA", 9: "CRICKET", 10: "HORMUZ",
+                11: "BUKELE", 12: "XAVIER", 13: "TRUMP"}
+TICKER = ("KYIV'S THREE BRIDGES HIT  \u00b7  AKVAN MAKES LANDFALL  \u00b7  "
+          "MARKETS IN AI SELL-OFF  \u00b7  COP31 IN OVERTIME")
 
 # region tallies, recomputed from the lists above (asserted in build())
 REGION_COUNT = {"EUROPE": 5, "AMERICAS": 10, "ASIA-PACIFIC": 10,
@@ -317,7 +325,9 @@ def scene_kyiv(draw, x, y, w, h):
                      fill=(200, 210, 230))
     # skyline silhouettes
     base = y + h - 26
-    heights = [34, 52, 28, 62, 44, 70, 38, 56, 30, 48]
+    # scale to the scene height so the tallest tower never clips the top
+    _s = (h - 30) / 70.0
+    heights = [int(v * _s) for v in [34, 52, 28, 62, 44, 70, 38, 56, 30, 48]]
     bx = x + 4
     for i, hh in enumerate(heights):
         bw = (w - 8) // 10
@@ -371,7 +381,7 @@ def scene_cop31(draw, x, y, w, h):
     draw.rectangle([tx + 3, y + 34, tx + 9, y + h - 40], fill=RED)
     draw.ellipse([tx - 1, y + h - 48, tx + 13, y + h - 32], fill=RED)
     draw.text((tx - 34, y + 16), "1.5\u00b0C", font=F_BOLD(9), fill=(255, 255, 255))
-    _chip(draw, x + w - 92, y + 8, "OVERTIME", F_BOLD(9), GOLD, NAVY_DARK)
+    # (the OVERTIME chip is drawn on the lead nameplate banner by build())
 
 
 def _band(draw, x, y, w, h, color):
@@ -421,7 +431,8 @@ def scene_bepi(draw, x, y, w, h):
     draw.rectangle([px - 4, py - 3, px + 4, py + 3], fill=(220, 225, 235))
     draw.line([px - 9, py, px - 4, py], fill=GOLD, width=2)
     draw.line([px + 4, py, px + 9, py], fill=GOLD, width=2)
-    draw.text((x + 6, y + 2), "SAT 21 NOV", font=F_BOLD(8), fill=GOLD_LT)
+    # (no in-scene date label: the card nameplate banner occupies the top-left;
+    # the date is in the headline)
 
 
 def scene_euuk(draw, x, y, w, h):
@@ -458,7 +469,7 @@ def scene_lpr(draw, x, y, w, h):
     # needle at 3.0% (middle)
     draw.line([cx, cy, cx, cy - r + 4], fill=RED, width=3)
     draw.ellipse([cx - 3, cy - 3, cx + 3, cy + 3], fill=GOLD)
-    draw.text((x + 6, y + 2), "18TH HOLD", font=F_BOLD(8), fill=GOLD_LT)
+    draw.text((x + 6, y + h - 13), "18TH HOLD", font=F_BOLD(8), fill=GOLD_LT)
 
 
 def scene_cricket(draw, x, y, w, h):
@@ -529,9 +540,9 @@ def scene_trump(draw, x, y, w, h):
     draw.ellipse([x + 84, y + 2, x + 92, y + 10], fill=(220, 220, 220))
     # small US flag
     for i in range(4):
-        draw.rectangle([x + 8, y + 6 + i * 5, x + 48, y + 10 + i * 5],
+        draw.rectangle([x + 8, y + 16 + i * 5, x + 48, y + 20 + i * 5],
                        fill=RED if i % 2 == 0 else (255, 255, 255))
-    draw.rectangle([x + 8, y + 6, x + 22, y + 16], fill=(20, 40, 110))
+    draw.rectangle([x + 8, y + 16, x + 22, y + 26], fill=(20, 40, 110))
     draw.text((x + w - 52, y + h - 14), "90 MIN", font=F_BOLD(8), fill=GOLD_LT)
 
 
@@ -633,48 +644,56 @@ def build(out_path):
     head = "Friday 20 November 2026"
     d.text(((W - d.textlength(head, font=F_SERIF(40))) / 2, 32), head,
            font=F_SERIF(40), fill=INK)
-    sub = "36 STORIES FROM FRIDAY 20 NOVEMBER 2026 \u2014 EVERY ONE VERIFIED TO THE DAY"
-    d.text(((W - d.textlength(sub, font=F_BOLD(12))) / 2, 76), sub,
-           font=F_BOLD(12), fill=MUTED)
+    # news ticker of the four biggest stories (v4.1); the 36-story count
+    # stays in the top bar and the region strip.
+    assert d.textlength(TICKER, font=F_BOLD(13)) <= CW, \
+        "ticker too long: %d" % d.textlength(TICKER, font=F_BOLD(13))
+    d.text(((W - d.textlength(TICKER, font=F_BOLD(13))) / 2, 76), TICKER,
+           font=F_BOLD(13), fill=RED)
 
-    # --- numbers strip ----------------------------------------------
-    y0, y1 = 92, 142
+    # --- numbers strip (v4.1: numbers enlarged 20 -> 27) -------------
+    y0, y1 = 92, 148
     cw6 = CW / 6
     for i, (num, lab) in enumerate(NUMBERS):
         cx = M + i * cw6
         if i:
             d.line([cx, y0 + 4, cx, y1 - 4], fill=LINE, width=1)
-        nw = d.textlength(num, font=F_BOLD(20))
-        d.text((cx + (cw6 - nw) / 2, y0 + 2), num, font=F_BOLD(20),
+        nw = d.textlength(num, font=F_BOLD(27))
+        assert nw <= cw6 - 8, "number %r too wide: %d" % (num, nw)
+        d.text((cx + (cw6 - nw) / 2, y0 + 2), num, font=F_BOLD(27),
                fill=RED if i in (1, 2) else INK)
-        lab_lines = fit_block(d, lab, F_BOLD(8), cw6 - 14, 2, 10,
+        lab_lines = fit_block(d, lab, F_BOLD(9), cw6 - 14, 2, 11,
                               "number label %r" % lab)
-        ly = y0 + 28
+        ly = y0 + 32
         for ln in lab_lines:
-            lw = d.textlength(ln, font=F_BOLD(8))
-            d.text((cx + (cw6 - lw) / 2, ly), ln, font=F_BOLD(8), fill=MUTED)
-            ly += 10
+            lw = d.textlength(ln, font=F_BOLD(9))
+            d.text((cx + (cw6 - lw) / 2, ly), ln, font=F_BOLD(9), fill=MUTED)
+            ly += 11
     d.line([M, y1, W - M, y1], fill=LINE, width=1)
 
     # --- region strip -------------------------------------------------
     rw = d.textlength(REGION_STRIP, font=F_BOLD(10))
-    d.text(((W - rw) / 2, 147), REGION_STRIP, font=F_BOLD(10), fill=INK)
+    d.text(((W - rw) / 2, 153), REGION_STRIP, font=F_BOLD(10), fill=INK)
 
     # --- leads (dark panels, ~40% of the page) -----------------------
-    lead_y, lead_h, lead_w, gap = 166, 260, 316, 10
+    lead_y, lead_h, lead_w, gap = 172, 258, 316, 10
     for i, ld in enumerate(LEADS):
         x = M + i * (lead_w + gap)
         d.rectangle([x, lead_y, x + lead_w, lead_y + lead_h], fill=NAVY_DARK)
         d.rectangle([x, lead_y, x + lead_w, lead_y + 3], fill=RED)
         d.text((x + 10, lead_y + 9), ld["kicker"], font=F_BOLD(10),
                fill=LEAD_KICK)
-        hl = fit_block(d, ld["head"], F_BOLD(16), lead_w - 20, 2, 19,
+        hl = fit_block(d, ld["head"], F_BOLD(18), lead_w - 20, 2, 20,
                        "lead %d headline" % ld["n"])
-        draw_lines(d, hl, x + 10, lead_y + 25, F_BOLD(16), (255, 255, 255), 19)
+        draw_lines(d, hl, x + 10, lead_y + 24, F_BOLD(18), (255, 255, 255), 20)
         sy = lead_y + 66
-        LEAD_SCENES[ld["scene"]](d, x + 10, sy, lead_w - 20, 100)
-        if ld["badge"] == "3 BRIDGES":
-            _chip(d, x + lead_w - 92, sy + 6, "3 BRIDGES", F_BOLD(9), GOLD,
+        # v4.1 nameplate: big white-on-red story name across the scene top
+        d.rectangle([x + 10, sy, x + lead_w - 10, sy + 20], fill=RED)
+        d.text((x + 18, sy + 3), LEAD_BANNERS[ld["n"]], font=F_BOLD(13),
+               fill=(255, 255, 255))
+        LEAD_SCENES[ld["scene"]](d, x + 10, sy + 20, lead_w - 20, 80)
+        if ld["badge"]:
+            _chip(d, x + lead_w - 92, sy + 2, ld["badge"], F_BOLD(9), GOLD,
                   NAVY_DARK)
         bl = fit_block(d, ld["body"], F_REG(10), lead_w - 20, 5, 13,
                        "lead %d body" % ld["n"])
@@ -684,7 +703,7 @@ def build(out_path):
 
     # --- cards (2 rows x 5) ------------------------------------------
     card_w, card_h, cgap, rgap = 188, 127, 7, 6
-    card_y0 = 432
+    card_y0 = 436
     for row in range(2):
         for col in range(5):
             cd = CARDS[row * 5 + col]
@@ -693,8 +712,16 @@ def build(out_path):
             d.rectangle([x, y, x + card_w, y + card_h], fill=CREAM,
                         outline=LINE, width=1)
             CARD_SCENES[cd["scene"]](d, x + 1, y + 1, card_w - 2, 40)
+            # v4.1 nameplate: same red banner label as the leads
+            _blab = CARD_BANNERS[cd["n"]]
+            _bw = d.textlength(_blab, font=F_BOLD(9)) + 10
+            d.rectangle([x + 1, y + 1, x + 1 + _bw, y + 15], fill=RED)
+            d.text((x + 5, y + 3), _blab, font=F_BOLD(9),
+                   fill=(255, 255, 255))
             d.text((x + 6, y + 45), cd["kicker"], font=F_BOLD(8), fill=RED)
             sw = d.textlength(cd["src"], font=F_REG(7))
+            assert d.textlength(cd["kicker"], font=F_BOLD(8)) + 6 + sw \
+                <= card_w - 12, "card %d kicker/src overlap" % cd["n"]
             d.text((x + card_w - 6 - sw, y + 46), cd["src"], font=F_REG(7),
                    fill=MUTED)
             hl = fit_block(d, cd["head"], F_BOLD(11), card_w - 12, 2, 12,
@@ -705,7 +732,7 @@ def build(out_path):
             draw_lines(d, bl, x + 6, y + 84, F_REG(9), INK, 11)
 
     # --- map + UTC timeline ------------------------------------------
-    map_y = 698
+    map_y = 700
     d.text((M, map_y), "THE WORLD \u2014 WHERE IT HAPPENED  (PINS 1\u20135, 7\u201313; "
            "6 IS IN SPACE)", font=F_BOLD(9), fill=INK)
     draw_map(d, M, map_y + 14, 562, 58)
@@ -718,7 +745,7 @@ def build(out_path):
         ty += 11
 
     # --- briefs -------------------------------------------------------
-    b_y = 778
+    b_y = 780
     d.text((M, b_y), "ALSO ON FRIDAY 20 NOVEMBER", font=F_BOLD(11), fill=INK)
     d.line([M + 218, b_y + 7, W - M, b_y + 7], fill=LINE, width=1)
     cols = [(M, 474), (M + 494, 480)]
