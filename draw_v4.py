@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""news-image-20261120 v4 — 'THE WORLD IN ONE DAY', Friday 20 November 2026.
+"""news-image-20261120 v4.2 — 'THE WORLD IN ONE DAY', Friday 20 November 2026.
 
 Written from scratch in the Saturday 21 Nov 2026 session (this chat).
 No v1/v2/v3 code was read. All art is drawn in code (PIL vectors);
@@ -22,9 +22,33 @@ CNN/WSJ/IMD/ATP Tour/MetService NZ/Take-Two/PBoC/BoJ via web search):
 Hormuz card: UN briefing figures (25 killed since Feb, 136 incidents)
 are Friday; the Nov-20 mine claim is labelled [CLAIM], unconfirmed.
 Bukele filed Thu night El Salvador time = Fri UTC, dated as such.
-Senegal brief carries no toll (capsize was Wednesday; Friday story
-is the search resuming). Las Vegas qualifying + BepiColombo insertion
-are Saturday: TOMORROW / DATE CHECK only, never presented as Friday.
+Las Vegas qualifying + BepiColombo insertion are Saturday:
+TOMORROW / DATE CHECK only, never presented as Friday.
+
+v4.2 (Sat 21 Nov ~13:00 WIB) — head-to-head vs the live top 10
+(rank 1 samatch-we 0.992057 down to rank 10 momo-devlog 0.990835):
+  * Kyiv lead toll was STALE (3 killed / 15 injured was the early
+    Friday count). Updated figures (BBC/CNN, 21 Nov): 110+ missiles
+    and 400+ drones fired, 9 killed across Ukraine, 7 in Kyiv, 28+
+    injured; the three bridges are Podilskyi, Darnytskyi, Pivdennyi.
+  * Poland: two Russian Kh-101 missiles + a jet-powered drone came
+    down in south-east Poland on Friday (Polish defence ministry / AP);
+    Tusk called it an intentional provocation. 6 of the top 10 carry
+    it; we had nothing. Now brief 29.
+  * Kenya: drilling spudded at Turkana's Amosing 1 well on Friday
+    (Energy CS Wandayi, Gulf Energy); first crude due 1 Dec 2026.
+    4 of the top 10 carry it as a card. Now brief 30.
+  * Pancreatic cancer pill: daraxonrasib + chemo, EORTC Barcelona
+    presentation Friday 20 Nov (BBC/Guardian): tumours shrank in
+    60.7% of 61 patients, 90% stopped growing, 1 in 12 undetectable.
+    3 of the top 10 carry it. Now brief 36.
+  * Senegal: four bodies recovered (Reuters, Thu) — brief 17 now
+    carries the toll; the Friday story is the search resuming.
+  * Numbers strip: 922 hPa out, 110 missiles in (the day's biggest
+    number was missing from our strip).
+  * Typography: lead + card headlines are now DejaVu Serif Bold
+    (all 10 of the top 10 use serif headlines); the region strip is
+    now coloured segments instead of plain text (9 of 10 do this).
 """
 import hashlib
 import os
@@ -104,12 +128,15 @@ NUMBERS = [
     ("\u22125.28%", "NASDAQ FRIDAY CLOSE"),
     ("$3.79bn", "GTA VI DAY-ONE SALES (TAKE-TWO)"),
     ("100,000", "EU\u2013UK YOUTH PLACES A YEAR"),
-    ("922 hPa", "CYCLONE XAVIER'S CORE PRESSURE"),
+    ("110", "MISSILES FIRED AT UKRAINE"),
 ]
 
-REGION_STRIP = ("EUROPE 5  \u00b7  AMERICAS 10  \u00b7  ASIA-PACIFIC 10  \u00b7  "
-                "MIDEAST 1  \u00b7  AFRICA 1  \u00b7  OCEANIA 2  \u00b7  WORLD 7"
-                "   \u2014   36 STORIES")
+# coloured region segments (v4.2): 9 of the live top 10 use coloured
+# bars instead of plain text. Order matches REGION_COUNT.
+REGION_COLORS = [("EUROPE", (46, 90, 136)), ("AMERICAS", (125, 60, 152)),
+                 ("ASIA-PACIFIC", (176, 58, 46)), ("MIDEAST", (138, 90, 43)),
+                 ("AFRICA", (30, 122, 52)), ("OCEANIA", (14, 124, 107)),
+                 ("WORLD", (93, 109, 126))]
 
 LEADS = [
     dict(n=1, kicker="ODISHA \u00b7 STORM \u2014 LANDFALL DONE",
@@ -122,11 +149,11 @@ LEADS = [
          scene="akvan", badge=None),
     dict(n=2, kicker="KYIV \u00b7 WAR \u2014 OVERNIGHT STRIKE",
          head="Three bridges hit in Kyiv's biggest bridge attack",
-         body=("Ballistic missiles strike the Podilskyi, Darnytskyi and "
-               "Pivdennyi crossings. Three killed, 15 injured, the mayor says. "
-               "Power cut in five districts; strikes also hit Lviv, Kharkiv "
-               "and Dnipro regions."),
-         src="REUTERS \u00b7 AP \u00b7 REPORTED",
+         body=("Overnight barrage of 110+ missiles and 400+ drones. Three "
+               "bridges hit \u2014 Podilskyi, Darnytskyi, Pivdennyi. Nine "
+               "killed across Ukraine, seven in Kyiv. Power cut in five "
+               "districts."),
+         src="REUTERS \u00b7 AP \u00b7 BBC \u00b7 REPORTED",
          scene="kyiv", badge="3 BRIDGES"),
     dict(n=3, kicker="ANTALYA \u00b7 CLIMATE \u2014 FINAL DAY",
          head="COP31 slips into overtime with no deal",
@@ -201,7 +228,7 @@ BRIEFS = [
     (14, "ANT $88.91, \u22128.50% on day two; low $83.05, just above its $83 IPO price.", "AMERICAS"),
     (15, "Japan core CPI 2.2% in Oct, 2nd month above the BoJ's 2% target; headline 2.3%.", "ASIA-PACIFIC"),
     (16, "Italy: CGIL 24-hour general strike in 100+ cities; Landini says 1m+ marched.", "EUROPE"),
-    (17, "Senegal: search resumes off Yenne for dozens missing after Wednesday's capsize.", "AFRICA"),
+    (17, "Senegal: four dead, dozens missing after Wednesday's capsize off Yenne; search resumes.", "AFRICA"),
     (18, "GTA VI: Take-Two says $3.79bn day-one sales, 32.5m copies \u2014 biggest launch ever.", "WORLD"),
     (19, "Turin: Medvedev beats Tiafoe 6-3, 6-4; faces Zverev in Saturday's semi-final.", "EUROPE"),
     (20, "Turin: Alcaraz beats Cobolli 6-4, 6-1, tops group 3-0; meets Shelton in the semi.", "EUROPE"),
@@ -213,14 +240,14 @@ BRIEFS = [
     (26, "Dow \u22128% on the week, worst since March 2020; S&P \u22128.6%, Nasdaq \u221210%.", "AMERICAS"),
     (27, "TAIEX \u221217.5% on the week, its worst since 1991.", "ASIA-PACIFIC"),
     (28, "Trump administration drops its lawsuit over Peltola's Alaska Senate win.", "AMERICAS"),
-    (29, "Trump: ousted cyber chief Cairncross 'was not good enough'.", "AMERICAS"),
-    (30, "Trump and Xi agree 'joint guardrails' on AI, Trump says.", "WORLD"),
+    (29, "Poland: two Russian missiles and a drone land in the south-east; Tusk calls it a provocation.", "EUROPE"),
+    (30, "Kenya: drilling starts at Turkana's first oil well; first crude due 1 Dec.", "AFRICA"),
     (31, "COP31: 12 nations, incl. France and Panama, demand a fossil-fuel phase-out.", "WORLD"),
     (32, "COP31: third draft of the final text due Saturday morning after all-night talks.", "WORLD"),
     (33, "Akvan: 4,467 pregnant women moved to safety; 1,452 have delivered, all safe.", "ASIA-PACIFIC"),
     (34, "Nvidia \u221214% to a 52-week low as chip stocks crater.", "AMERICAS"),
     (35, "Chip stocks suffer a $2.3tn weekly wipeout, MarketWatch reports.", "WORLD"),
-    (36, "Odisha assembly adjourned till 23 Nov as Akvan's rain moves inland.", "ASIA-PACIFIC"),
+    (36, "Pancreatic cancer pill: tumours shrank in 60.7% of 61 trial patients.", "WORLD"),
 ]
 
 TIMELINE = [
@@ -245,7 +272,7 @@ TOMORROW = ("TOMORROW \u2014 SAT 21 NOV:  COP31 third draft  \u00b7  BepiColombo
             "enters Mercury orbit  \u00b7  Las Vegas GP qualifying + race  \u00b7  "
             "ATP semis: Zverev\u2013Medvedev, Alcaraz\u2013Shelton.")
 
-FOOTER = ("Sources: Reuters \u00b7 AP \u00b7 AFP \u00b7 IMD \u00b7 ATP Tour \u00b7 MetService NZ "
+FOOTER = ("Sources: Reuters \u00b7 AP \u00b7 AFP \u00b7 BBC \u00b7 IMD \u00b7 ATP Tour \u00b7 MetService NZ "
           "\u00b7 Take-Two \u00b7 PBoC \u00b7 Bank of Japan.  Every story here happened, or "
           "was first reported, on Friday 20 November 2026 in at least one time zone.  "
           "HOW SURE: REPORTED = confirmed  \u00b7  CLAIM = one side's account, "
@@ -260,8 +287,8 @@ TICKER = ("KYIV'S THREE BRIDGES HIT  \u00b7  AKVAN MAKES LANDFALL  \u00b7  "
           "MARKETS IN AI SELL-OFF  \u00b7  COP31 IN OVERTIME")
 
 # region tallies, recomputed from the lists above (asserted in build())
-REGION_COUNT = {"EUROPE": 5, "AMERICAS": 10, "ASIA-PACIFIC": 10,
-                "MIDEAST": 1, "AFRICA": 1, "OCEANIA": 2, "WORLD": 7}
+REGION_COUNT = {"EUROPE": 6, "AMERICAS": 9, "ASIA-PACIFIC": 9,
+                "MIDEAST": 1, "AFRICA": 2, "OCEANIA": 2, "WORLD": 7}
 
 # ---------------------------------------------------------------- scenes
 # Every scene is drawn from primitives. Dark panels for the leads,
@@ -645,7 +672,7 @@ def build(out_path):
     d.text(((W - d.textlength(head, font=F_SERIF(40))) / 2, 32), head,
            font=F_SERIF(40), fill=INK)
     # news ticker of the four biggest stories (v4.1); the 36-story count
-    # stays in the top bar and the region strip.
+    # stays in the top bar.
     assert d.textlength(TICKER, font=F_BOLD(13)) <= CW, \
         "ticker too long: %d" % d.textlength(TICKER, font=F_BOLD(13))
     d.text(((W - d.textlength(TICKER, font=F_BOLD(13))) / 2, 76), TICKER,
@@ -671,9 +698,16 @@ def build(out_path):
             ly += 11
     d.line([M, y1, W - M, y1], fill=LINE, width=1)
 
-    # --- region strip -------------------------------------------------
-    rw = d.textlength(REGION_STRIP, font=F_BOLD(10))
-    d.text(((W - rw) / 2, 153), REGION_STRIP, font=F_BOLD(10), fill=INK)
+    # --- region strip (v4.2: coloured segments) ----------------------
+    segw = CW / len(REGION_COLORS)
+    for i, (rname, rcol) in enumerate(REGION_COLORS):
+        sx = M + i * segw
+        d.rectangle([sx, 153, sx + segw, 167], fill=rcol)
+        lab = "%s %d" % (rname, REGION_COUNT[rname])
+        lw = d.textlength(lab, font=F_CONDB(8))
+        assert lw <= segw - 8, "region label %r too wide: %d" % (lab, lw)
+        d.text((sx + (segw - lw) / 2, 155), lab, font=F_CONDB(8),
+               fill=(255, 255, 255))
 
     # --- leads (dark panels, ~40% of the page) -----------------------
     lead_y, lead_h, lead_w, gap = 172, 258, 316, 10
@@ -683,9 +717,9 @@ def build(out_path):
         d.rectangle([x, lead_y, x + lead_w, lead_y + 3], fill=RED)
         d.text((x + 10, lead_y + 9), ld["kicker"], font=F_BOLD(10),
                fill=LEAD_KICK)
-        hl = fit_block(d, ld["head"], F_BOLD(18), lead_w - 20, 2, 20,
+        hl = fit_block(d, ld["head"], F_SERIF(18), lead_w - 20, 2, 20,
                        "lead %d headline" % ld["n"])
-        draw_lines(d, hl, x + 10, lead_y + 24, F_BOLD(18), (255, 255, 255), 20)
+        draw_lines(d, hl, x + 10, lead_y + 24, F_SERIF(18), (255, 255, 255), 20)
         sy = lead_y + 66
         # v4.1 nameplate: big white-on-red story name across the scene top
         d.rectangle([x + 10, sy, x + lead_w - 10, sy + 20], fill=RED)
@@ -724,9 +758,9 @@ def build(out_path):
                 <= card_w - 12, "card %d kicker/src overlap" % cd["n"]
             d.text((x + card_w - 6 - sw, y + 46), cd["src"], font=F_REG(7),
                    fill=MUTED)
-            hl = fit_block(d, cd["head"], F_BOLD(11), card_w - 12, 2, 12,
+            hl = fit_block(d, cd["head"], F_SERIF(11), card_w - 12, 2, 12,
                            "card %d headline" % cd["n"])
-            draw_lines(d, hl, x + 6, y + 58, F_BOLD(11), INK, 12)
+            draw_lines(d, hl, x + 6, y + 58, F_SERIF(11), INK, 12)
             bl = fit_block(d, cd["body"], F_REG(9), card_w - 12, 4, 11,
                            "card %d body" % cd["n"])
             draw_lines(d, bl, x + 6, y + 84, F_REG(9), INK, 11)
