@@ -44,6 +44,30 @@ colliding with the source line, so kickers are now place-only and the
 source line drops the redundant "· REPORTED" (timestamps and the CLAIM /
 FORECAST flags stay). See `../V4.1-REPORT.md`.
 
+v4.2 (same session, ~13:05 WIB — second head-to-head, this time against
+the live top 1–10 with their images downloaded and read: rank 1
+samatch-we 0.992057 down to rank 10 momo-devlog 0.990835): the Kyiv lead
+toll was STALE — 3 killed / 15 injured was the early Friday count; the
+updated figures (BBC/CNN) are 110+ missiles and 400+ drones fired, 9
+killed across Ukraine, 7 in Kyiv, 28+ injured. Three stories the top 10
+carry and we lacked are added as briefs, replacing the three weakest
+(Cairncross quote, Trump–Xi "guardrails", Odisha assembly): Poland —
+two Russian Kh-101 missiles and a jet-powered drone came down in the
+south-east on Friday, Tusk calls it a provocation (6 of the top 10
+carry it); Kenya — drilling spudded at Turkana's Amosing 1 well on
+Friday, first crude due 1 Dec (4 of the top 10); and the pancreatic
+cancer pill — daraxonrasib + chemo, EORTC Barcelona presentation
+Friday, tumours shrank in 60.7% of 61 patients (3 of the top 10).
+Correction to v3.1: the pill was rejected then because the August FDA
+approval angle could not carry the figure; the Friday trial
+presentation is a different, verified news event (BBC/Guardian).
+Senegal's toll (4 dead, Reuters) is restored to brief 17. The numbers
+strip swaps 922 hPa out for 110 missiles in. Typography: lead and card
+headlines are now DejaVu Serif Bold (all 10 of the top 10 use serif
+headlines) and the region strip is now coloured segments (9 of 10 do
+this). Region tallies are now EUROPE 6 · AMERICAS 9 · ASIA-PACIFIC 9 ·
+MIDEAST 1 · AFRICA 2 · OCEANIA 2 · WORLD 7. See `../V4.2-REPORT.md`.
+
 v3 (afternoon refresh, 20 Nov ~16:30 WIB): Akvan landfall DONE (07:30-08:30
 IST, 372,000 evacuated, no major damage so far); Kyiv promoted to lead 2
 (3 killed, 3 bridges hit); COP31 lead 3 (final day, fossil fuels dropped
