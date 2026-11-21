@@ -1,23 +1,29 @@
 #!/usr/bin/env python3
-"""main.py — news-image-20261120 v3 entrypoint.
-Copies the pre-rendered entry.png to the output directory.
-Deterministic: the same bytes every run.
+"""news-image-20261120 v4 entrypoint.
+
+Copies the entry.png produced in this session (by draw_v4.py) into the
+current working directory, byte for byte. Deterministic: no network,
+no clock, no randomness — the same bytes every run.
 """
 import os
 import shutil
+import sys
 
 
-def publish():
+def main():
     here = os.path.dirname(os.path.abspath(__file__))
     src = os.path.join(here, "entry.png")
-    outdir = os.environ.get("MAKEFUN_OUTPUT_DIR", "/output")
-    os.makedirs(outdir, exist_ok=True)
-    dst = os.path.join(outdir, "entry.png")
-    shutil.copyfile(src, dst)
-    with open(src, "rb") as fh:
-        size = len(fh.read())
-    print(f"entry.png ({size} bytes) -> {dst}")
+    dst = os.path.join(os.getcwd(), "entry.png")
+    if os.path.abspath(src) != os.path.abspath(dst):
+        shutil.copyfile(src, dst)
+    out_dir = os.environ.get("MAKEFUN_OUTPUT_DIR")
+    if out_dir:
+        os.makedirs(out_dir, exist_ok=True)
+        alt = os.path.join(out_dir, "entry.png")
+        if os.path.abspath(alt) != os.path.abspath(src):
+            shutil.copyfile(src, alt)
+    print("entry.png ready: %d bytes" % os.path.getsize(dst))
 
 
 if __name__ == "__main__":
-    publish()
+    sys.exit(main())
