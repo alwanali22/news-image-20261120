@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""news-image-20261120 v4.2 — 'THE WORLD IN ONE DAY', Friday 20 November 2026.
+"""news-image-20261120 v4.3 — 'THE WORLD IN ONE DAY', Friday 20 November 2026.
 
 Written from scratch in the Saturday 21 Nov 2026 session (this chat).
 No v1/v2/v3 code was read. All art is drawn in code (PIL vectors);
@@ -25,7 +25,7 @@ Bukele filed Thu night El Salvador time = Fri UTC, dated as such.
 Las Vegas qualifying + BepiColombo insertion are Saturday:
 TOMORROW / DATE CHECK only, never presented as Friday.
 
-v4.2 (Sat 21 Nov ~13:00 WIB) — head-to-head vs the live top 10
+v4.2 (Sat 21 Nov ~13:05 WIB) — head-to-head vs the live top 10
 (rank 1 samatch-we 0.992057 down to rank 10 momo-devlog 0.990835):
   * Kyiv lead toll was STALE (3 killed / 15 injured was the early
     Friday count). Updated figures (BBC/CNN, 21 Nov): 110+ missiles
@@ -49,6 +49,24 @@ v4.2 (Sat 21 Nov ~13:00 WIB) — head-to-head vs the live top 10
   * Typography: lead + card headlines are now DejaVu Serif Bold
     (all 10 of the top 10 use serif headlines); the region strip is
     now coloured segments instead of plain text (9 of 10 do this).
+
+v4.3 (Sat 21 Nov ~13:20 WIB) — ONE structural change, per the main
+agent's round-2 head-to-head instruction (live top 1-10, 12:45 WIB):
+in EVERY top-10 entry the lead headline + body sit BELOW the scene,
+on cream, dark serif — never inside the dark panel. v4.1/v4.2 still
+put headline + body inside the dark panel (white 18px), so at a
+glance it read quieter than rank 1, 2 and newcomer rank 5
+(dewacandra4, 4 leads). This round moves the lead headline + body
+below the scene onto the cream, dark serif, with the red nameplate
+banner + dark scene kept on top. No story, number or date changed
+(all v4.2 content kept). Measured first: 20px serif is the max that
+fits the longest lead headline (Kyiv, 48 chars) in 2 lines — 22px
+needs 3 lines; leads 1 and 3 would fit 22-24px, but the size must
+match across the three leads. Card headlines raised 11 -> 12px
+serif (card 6's headline trimmed to "BepiColombo set for Mercury
+orbit" — the date is in its body + the TOMORROW line — so it still
+fits 2 lines). Lead kicker now carries the story number in a red
+disc, like the top 10. Lead scene height 80 -> 100px.
 """
 import hashlib
 import os
@@ -71,8 +89,6 @@ GOLD_LT = (255, 209, 102)
 CREAM = (255, 253, 246)
 MUTED = (90, 100, 114)
 LINE = (201, 192, 170)
-LEAD_BODY = (215, 222, 233)
-LEAD_KICK = (255, 209, 102)
 SEA = (16, 42, 74)
 LAND = (44, 74, 99)
 
@@ -179,7 +195,7 @@ CARDS = [
                "SoftBank \u221214.48%."),
          src="CNBC \u00b7 ASIA CLOSE", scene="asiaai"),
     dict(n=6, kicker="MERCURY",
-         head="BepiColombo set for Mercury orbit on Saturday",
+         head="BepiColombo set for Mercury orbit",
          body=("After eight years in space, the ESA\u2013JAXA probe enters "
                "Mercury orbit on Sat 21 Nov. Insertion is the key "
                "manoeuvre."),
@@ -709,31 +725,42 @@ def build(out_path):
         d.text((sx + (segw - lw) / 2, 155), lab, font=F_CONDB(8),
                fill=(255, 255, 255))
 
-    # --- leads (dark panels, ~40% of the page) -----------------------
+    # --- leads (v4.3: scene on top, headline + body BELOW the scene on
+    # cream, dark serif — the structure every live top-10 entry uses) --
     lead_y, lead_h, lead_w, gap = 172, 258, 316, 10
+    scene_h = 100
     for i, ld in enumerate(LEADS):
         x = M + i * (lead_w + gap)
-        d.rectangle([x, lead_y, x + lead_w, lead_y + lead_h], fill=NAVY_DARK)
+        # dark panel covers only the scene (banner + art); the text below
+        # sits on the page cream, like the top 10.
+        d.rectangle([x, lead_y, x + lead_w, lead_y + 3 + 20 + scene_h],
+                    fill=NAVY_DARK)
         d.rectangle([x, lead_y, x + lead_w, lead_y + 3], fill=RED)
-        d.text((x + 10, lead_y + 9), ld["kicker"], font=F_BOLD(10),
-               fill=LEAD_KICK)
-        hl = fit_block(d, ld["head"], F_SERIF(18), lead_w - 20, 2, 20,
-                       "lead %d headline" % ld["n"])
-        draw_lines(d, hl, x + 10, lead_y + 24, F_SERIF(18), (255, 255, 255), 20)
-        sy = lead_y + 66
+        sy = lead_y + 3
         # v4.1 nameplate: big white-on-red story name across the scene top
         d.rectangle([x + 10, sy, x + lead_w - 10, sy + 20], fill=RED)
         d.text((x + 18, sy + 3), LEAD_BANNERS[ld["n"]], font=F_BOLD(13),
                fill=(255, 255, 255))
-        LEAD_SCENES[ld["scene"]](d, x + 10, sy + 20, lead_w - 20, 80)
+        LEAD_SCENES[ld["scene"]](d, x + 10, sy + 20, lead_w - 20, scene_h)
         if ld["badge"]:
             _chip(d, x + lead_w - 92, sy + 2, ld["badge"], F_BOLD(9), GOLD,
                   NAVY_DARK)
-        bl = fit_block(d, ld["body"], F_REG(10), lead_w - 20, 5, 13,
+        # kicker with the story number in a red disc, below the scene
+        ky = lead_y + 130
+        d.ellipse([x + 10, ky, x + 22, ky + 12], fill=RED)
+        _nt = str(ld["n"])
+        d.text((x + 10 + (12 - d.textlength(_nt, font=F_BOLD(9))) / 2, ky + 1),
+               _nt, font=F_BOLD(9), fill=(255, 255, 255))
+        d.text((x + 28, ky), ld["kicker"], font=F_BOLD(10), fill=RED)
+        # headline: dark serif on cream. 20px is the max that fits the
+        # longest headline (Kyiv, 48 chars) in 2 lines; 22px needs 3.
+        hl = fit_block(d, ld["head"], F_SERIF(20), lead_w - 20, 2, 22,
+                       "lead %d headline" % ld["n"])
+        draw_lines(d, hl, x + 10, lead_y + 144, F_SERIF(20), INK, 22)
+        bl = fit_block(d, ld["body"], F_REG(10), lead_w - 20, 4, 13,
                        "lead %d body" % ld["n"])
-        draw_lines(d, bl, x + 10, lead_y + 172, F_REG(10), LEAD_BODY, 13)
-        d.text((x + 10, lead_y + 242), ld["src"], font=F_BOLD(8),
-               fill=(150, 170, 200))
+        by_end = draw_lines(d, bl, x + 10, lead_y + 192, F_REG(10), INK, 13)
+        d.text((x + 10, by_end + 4), ld["src"], font=F_BOLD(8), fill=MUTED)
 
     # --- cards (2 rows x 5) ------------------------------------------
     card_w, card_h, cgap, rgap = 188, 127, 7, 6
@@ -758,12 +785,12 @@ def build(out_path):
                 <= card_w - 12, "card %d kicker/src overlap" % cd["n"]
             d.text((x + card_w - 6 - sw, y + 46), cd["src"], font=F_REG(7),
                    fill=MUTED)
-            hl = fit_block(d, cd["head"], F_SERIF(11), card_w - 12, 2, 12,
+            hl = fit_block(d, cd["head"], F_SERIF(12), card_w - 12, 2, 13,
                            "card %d headline" % cd["n"])
-            draw_lines(d, hl, x + 6, y + 58, F_SERIF(11), INK, 12)
+            draw_lines(d, hl, x + 6, y + 58, F_SERIF(12), INK, 13)
             bl = fit_block(d, cd["body"], F_REG(9), card_w - 12, 4, 11,
                            "card %d body" % cd["n"])
-            draw_lines(d, bl, x + 6, y + 84, F_REG(9), INK, 11)
+            draw_lines(d, bl, x + 6, y + 86, F_REG(9), INK, 11)
 
     # --- map + UTC timeline ------------------------------------------
     map_y = 700
