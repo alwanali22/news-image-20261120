@@ -50,6 +50,26 @@ v4.2 (Sat 21 Nov ~13:05 WIB) — head-to-head vs the live top 10
     (all 10 of the top 10 use serif headlines); the region strip is
     now coloured segments instead of plain text (9 of 10 do this).
 
+v4.4 (Sat 21 Nov ~16:20 WIB) — v4.3 FAILED grading (submission
+01a1fcc1, "execution 1: the program exited with code 1", 548ms;
+authorship 95% passed, image never graded, score 0). Root cause,
+proven locally: main.py only COPIED a pre-rendered entry.png, so in
+a clean dir (no entry.png beside it) it died FileNotFoundError.
+FIXES: (1) main.py now GENERATES via draw_v4.py when entry.png is
+absent, never crashes on a read-only cwd (best-effort copy), main
+output $MAKEFUN_OUTPUT_DIR (default /output), prints size + sha256.
+(2) The 5 DejaVu TTFs are bundled in fonts/ (the grading image has
+no fonts-dejavu-extra, so DejaVuSansCondensed was missing);
+draw_v4.py loads from fonts/ first, falls back to /usr/share.
+Bundled fonts are byte-identical to the system files, so the
+pre-visual-fix output is byte-identical to v4.3. (3) Visual, no
+story/number/date changed: Kyiv lead scene is now a BRIGHT bridge
+diagram (white deck/arch/piers on dark blue, glowing fire on each
+span); COP31 globe has visible green continents + thermometer;
+Mercury card scene is a cratered disc (night-side shading + pits);
+the world map is a LIGHT cream panel with warm-tan land dots and
+clear red numbered pins (like ranks 1/2/10).
+
 v4.3 (Sat 21 Nov ~13:20 WIB) — ONE structural change, per the main
 agent's round-2 head-to-head instruction (live top 1-10, 12:45 WIB):
 in EVERY top-10 entry the lead headline + body sit BELOW the scene,
@@ -92,11 +112,20 @@ LINE = (201, 192, 170)
 SEA = (16, 42, 74)
 LAND = (44, 74, 99)
 
-FONT_DIR = "/usr/share/fonts/truetype/dejavu"
+# v4.4: fonts are bundled in fonts/ next to this file so the entry
+# renders identically on any machine (the grading image has no
+# fonts-dejavu-extra, so DejaVuSansCondensed would be missing).
+# Fall back to the system font dir if the bundled files are gone.
+_HERE = os.path.dirname(os.path.abspath(__file__))
+_REPO_FONT_DIR = os.path.join(_HERE, "fonts")
+_SYS_FONT_DIR = "/usr/share/fonts/truetype/dejavu"
 
 
 def font(name, size):
-    return ImageFont.truetype(os.path.join(FONT_DIR, name), size)
+    path = os.path.join(_REPO_FONT_DIR, name)
+    if not os.path.exists(path):
+        path = os.path.join(_SYS_FONT_DIR, name)
+    return ImageFont.truetype(path, size)
 
 
 F_SERIF = lambda s: font("DejaVuSerif-Bold.ttf", s)          # noqa: E731
@@ -378,14 +407,22 @@ def scene_kyiv(draw, x, y, w, h):
         for wy in range(base - hh + 6, base - 4, 9):
             draw.rectangle([bx + 3, wy, bx + 5, wy + 2], fill=GOLD)
         bx += bw
-    # river band + three bridge arcs
-    draw.rectangle([x, y + h - 26, x + w, y + h], fill=(20, 48, 82))
+    # river band + three BRIGHT bridge diagrams (v4.4): white deck,
+    # white arch and piers on dark blue, fire glowing on each span
+    draw.rectangle([x, y + h - 26, x + w, y + h], fill=(10, 32, 60))
     for i, cx in enumerate([0.22, 0.5, 0.78]):
         cxp = x + w * cx
-        draw.arc([cxp - 34, y + h - 44, cxp + 34, y + h - 4], 180, 360,
-                 fill=(220, 230, 240), width=2)
-        # fire on the bridge
-        fx, fy = cxp - 4, y + h - 40
+        draw.line([cxp - 40, y + h - 26, cxp + 40, y + h - 26],
+                  fill=(255, 255, 255), width=2)
+        draw.arc([cxp - 34, y + h - 46, cxp + 34, y + h - 6], 180, 360,
+                 fill=(255, 255, 255), width=3)
+        draw.line([cxp - 34, y + h - 26, cxp - 34, y + h - 6],
+                  fill=(255, 255, 255), width=2)
+        draw.line([cxp + 34, y + h - 26, cxp + 34, y + h - 6],
+                  fill=(255, 255, 255), width=2)
+        # fire on the span: glowing dot + flame
+        fx, fy = cxp, y + h - 32
+        draw.ellipse([fx - 6, fy - 6, fx + 6, fy + 6], fill=(255, 140, 40))
         draw.polygon([(fx, fy - 12), (fx - 6, fy + 2), (fx + 6, fy + 2)],
                      fill=(255, 140, 40))
         draw.polygon([(fx, fy - 6), (fx - 3, fy + 2), (fx + 3, fy + 2)],
@@ -406,10 +443,18 @@ def scene_cop31(draw, x, y, w, h):
             dx = x + 14 + col * 19
             dy = y + h - 34 + row * 9
             draw.ellipse([dx, dy, dx + 3, dy + 3], fill=(120, 150, 190))
-    # globe
+    # globe with visible continents (v4.4): green landmasses on blue,
+    # not a plain disc — reads as climate at a glance
     gx, gy, gr = x + 62, y + 46, 30
     draw.ellipse([gx - gr, gy - gr, gx + gr, gy + gr], fill=(38, 110, 160),
                  outline=(140, 190, 220), width=2)
+    _land = (86, 190, 110)
+    draw.ellipse([gx - 24, gy - 14, gx - 10, gy + 2], fill=_land)
+    draw.polygon([(gx - 10, gy - 18), (gx + 2, gy - 22), (gx + 8, gy - 10),
+                  (gx - 2, gy - 6)], fill=_land)
+    draw.ellipse([gx + 2, gy - 8, gx + 16, gy + 10], fill=_land)
+    draw.ellipse([gx + 12, gy - 18, gx + 26, gy - 4], fill=_land)
+    draw.ellipse([gx - 16, gy + 12, gx - 2, gy + 24], fill=_land)
     draw.arc([gx - gr, gy - gr, gx + gr, gy + gr], 200, 340,
              fill=(90, 200, 120), width=3)
     draw.arc([gx - gr, gy - gr, gx + gr, gy + gr], 20, 120,
@@ -463,10 +508,19 @@ def scene_bepi(draw, x, y, w, h):
     _band(draw, x, y, w, h, (8, 10, 18))
     for sx, sy in [(12, 8), (40, 20), (90, 6), (140, 16), (170, 10)]:
         draw.ellipse([x + sx, y + sy, x + sx + 1, y + sy + 1], fill=(220, 220, 220))
-    # Mercury
-    draw.ellipse([x + w - 52, y + 6, x + w - 14, y + h - 14], fill=(200, 130, 60),
-                 outline=(240, 180, 110), width=2)
-    draw.ellipse([x + w - 44, y + 12, x + w - 36, y + 20], fill=(170, 100, 40))
+    # Mercury: cratered disc (v4.4) — proper circle with pits and a
+    # darker night side, not a brown blob
+    cx, cy, r = x + w - 34, y + h // 2, 15
+    draw.ellipse([cx - r, cy - r, cx + r, cy + r], fill=(205, 140, 70),
+                 outline=(245, 190, 120), width=2)
+    draw.pieslice([cx - r, cy - r, cx + r, cy + r], 90, 270,
+                  fill=(150, 85, 30))
+    for (ox, oy, cr) in [(-6, -5, 3), (4, -7, 2), (6, 3, 3), (-2, 6, 2),
+                         (1, 0, 2), (-8, 2, 2)]:
+        draw.ellipse([cx + ox - cr, cy + oy - cr, cx + ox + cr,
+                      cy + oy + cr], fill=(140, 75, 25))
+    draw.ellipse([cx - r, cy - r, cx + r, cy + r], outline=(245, 190, 120),
+                 width=2)
     # orbit + probe
     draw.arc([x + 8, y + 4, x + w - 40, y + h - 4], 90, 330, fill=(150, 170, 200),
              width=1)
@@ -619,7 +673,10 @@ PINS = [
 
 
 def draw_map(draw, x, y, w, h):
-    draw.rectangle([x, y, x + w, y + h], outline=LINE, width=1)
+    # v4.4: light cream panel + warm-tan land dots (ranks 1/2/10 use a
+    # light map); red pins with white numbers stay.
+    draw.rectangle([x, y, x + w, y + h], fill=(233, 226, 203),
+                   outline=LINE, width=1)
     lon0, lon1, lat0, lat1 = -180, 180, 78, -58
 
     def px(lon):
@@ -635,7 +692,7 @@ def draw_map(draw, x, y, w, h):
             if any(a <= lon <= c and b <= lat <= d
                    for (a, b, c, d) in LAND_BOXES):
                 draw.ellipse([px(lon) - 1, py(lat) - 1, px(lon) + 1,
-                              py(lat) + 1], fill=(70, 100, 140))
+                              py(lat) + 1], fill=(176, 156, 110))
             lat += 6
         lon += 4
     for (lon, lat, n, dx, dy, odx, ody) in PINS:
