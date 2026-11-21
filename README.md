@@ -30,8 +30,7 @@ conference, and Take-Two's official GTA VI day-one figure ($3.79bn,
 leads with the UN's Friday briefing (25 seafarers killed since February,
 136 incidents); the Nov-20 mine claim stays labelled [CLAIM]. Las Vegas
 qualifying and the BepiColombo insertion are Saturday events — TOMORROW /
-DATE CHECK only. See `../V4-REPORT.md` (to be written by the build
-session) and `../V4-BRIEF-2026-11-21.md`.
+DATE CHECK only. See `../V4-REPORT.md` and `../V4-BRIEF-2026-11-21.md`.
 
 v3 (afternoon refresh, 20 Nov ~16:30 WIB): Akvan landfall DONE (07:30-08:30
 IST, 372,000 evacuated, no major damage so far); Kyiv promoted to lead 2
