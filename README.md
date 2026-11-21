@@ -44,6 +44,28 @@ colliding with the source line, so kickers are now place-only and the
 source line drops the redundant "· REPORTED" (timestamps and the CLAIM /
 FORECAST flags stay). See `../V4.1-REPORT.md`.
 
+v4.4 (same session, ~16:40 WIB — v4.3 FAILED grading: "execution 1:
+the program exited with code 1", 548ms; authorship 95% passed but
+the image was never graded, score 0). Root cause, proven locally:
+main.py only COPIED a pre-rendered entry.png, so in a clean dir
+without entry.png beside it it died FileNotFoundError. Fixes: (1)
+main.py now GENERATES via draw_v4.py when entry.png is absent,
+never crashes on a read-only cwd (best-effort copy + temp-dir
+fallback), main output $MAKEFUN_OUTPUT_DIR (default /output),
+prints size + sha256 — exit 0 in all tested conditions (full repo,
+empty dir, system fonts hidden, read-only cwd as an unprivileged
+user, read-only dir without entry.png). (2) The 5 DejaVu TTFs are
+bundled in fonts/ (the grading image has no fonts-dejavu-extra, so
+DejaVuSansCondensed was missing); draw_v4.py loads from fonts/
+first, falls back to /usr/share — byte-identical output verified
+before the visual changes. (3) Visual, no story/number/date
+changed: Kyiv lead scene is now a BRIGHT bridge diagram (white
+deck/arch/piers on dark blue, glowing fire on each span); the COP31
+globe has visible green continents + thermometer; the Mercury card
+scene is a cratered disc with a darker night side; the world map is
+a LIGHT cream panel with warm-tan land dots and clear red numbered
+pins (like ranks 1/2/10). See `../V4.4-REPORT.md`.
+
 v4.3 (same session, ~13:20 WIB — ONE structural change, per the main
 agent's round-2 head-to-head against the live top 1–10): in every top-10
 entry the lead headline + body sit BELOW the scene, on cream, dark
