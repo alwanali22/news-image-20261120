@@ -44,6 +44,22 @@ colliding with the source line, so kickers are now place-only and the
 source line drops the redundant "· REPORTED" (timestamps and the CLAIM /
 FORECAST flags stay). See `../V4.1-REPORT.md`.
 
+v4.3 (same session, ~13:20 WIB — ONE structural change, per the main
+agent's round-2 head-to-head against the live top 1–10): in every top-10
+entry the lead headline + body sit BELOW the scene, on cream, dark
+serif — never inside the dark panel. v4.1/v4.2 still put them inside
+the dark panel (white 18px), so at a glance they read quieter than
+rank 1, 2 and newcomer rank 5 (dewacandra4, 4 leads). This round moves
+each lead's headline + body below its scene onto the cream, dark serif
+20px (measured first: 20px is the max that fits the longest headline,
+Kyiv's 48 chars, in 2 lines — 22px needs 3), with the red nameplate
+banner + dark scene kept on top and the scene enlarged 80 → 100px.
+The lead kicker now carries the story number in a red disc, like the
+top 10. Card headlines raised 11 → 12px serif (card 6's headline
+trimmed to "BepiColombo set for Mercury orbit" — the date is in its
+body + the TOMORROW line). No story, number, or date changed; all
+v4.2 content kept. See `../V4.3-REPORT.md`.
+
 v4.2 (same session, ~13:05 WIB — second head-to-head, this time against
 the live top 1–10 with their images downloaded and read: rank 1
 samatch-we 0.992057 down to rank 10 momo-devlog 0.990835): the Kyiv lead
